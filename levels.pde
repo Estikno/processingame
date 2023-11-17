@@ -1,4 +1,4 @@
-String[] levels = {"1.txt", "2.txt"};
+String[] levels = {"1.txt", "2.txt", "3.txt"};
 int actualLevel = 0;
 ArrayList<ArrayList<float[]>> levelsInfo = new ArrayList<ArrayList<float[]>>();
 boolean levelGenerated = false;

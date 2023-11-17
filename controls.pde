@@ -39,8 +39,6 @@ void mouseReleased(){
       else if(vel[1] < 0) vel[1] = -maxVel[1];
     }
     
-    printArray(vel);
-    
     ball = new Circle(new float[] {initialBall[0], initialBall[1]}, vel, 20, new float[] {0, gravity});
     interacting = false;
     canInteract = false;
@@ -50,6 +48,7 @@ void mouseReleased(){
 void keyPressed(){
   if(key=='r'){
     generateLevel(actualLevel);
+    audio(deathSound);
   }
 }
 
@@ -57,14 +56,14 @@ ArrayList<float[]> calculateTrajectory(float posx0, float posy0, float[] v0){
   ArrayList<float[]> points = new ArrayList<float[]>();
   
   if(v0[0] > 0){ //velocidad hacia la derecha
-    for(float x = posx0; x < posx0+300; x++){
+    for(float x = posx0; x < posx0+150; x++){
       float tn = t(x, posx0, v0[0]);
       float y = posy0+v0[1]*tn+.5*gravity*(tn*tn);
       points.add(new float[] {x, y});
     }
   }
   else{ //hacia la izquierda
-    for(float x = posx0; x > posx0-300; x--){
+    for(float x = posx0; x > posx0-150; x--){
       float tn = t(x, posx0, v0[0]);
       float y = posy0+v0[1]*tn+.5*gravity*(tn*tn);
       points.add(new float[] {x, y});

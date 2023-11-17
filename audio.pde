@@ -1,6 +1,11 @@
-Minim se;
+SoundFile se;
+SoundFile musica;
+
+String reboteSound = "col.mp3";
+String deathSound = "death.mp3";
+String victoriaSound = "victoria.mp3";
 
 void audio(String name){
-  AudioSample sonido = se.loadSample(name);
-  sonido.trigger();
+  se = new SoundFile(this, name);
+  se.play();
 }

@@ -14,11 +14,13 @@ void detectCollisions() {
     
   if(x-r-collisionOffset <= 0 || x+r+collisionOffset >= width){
     ball.colDetected(new int[] {1, 0});
+    audio(reboteSound);
     return;
   }
     
   if(y+r+collisionOffset >= height || y-r-collisionOffset <= 0){
     ball.colDetected(new int[] {0, 1});
+    audio(reboteSound);
     return;
   }
   
@@ -47,7 +49,13 @@ void detectCollisions() {
       if(testX == x) ball.colDetected(new int[] {0, 1});
       if(testY == y) ball.colDetected(new int[] {1, 0});
       
-      if(o.isMeta()) nextLevel();
+      if(o.isMeta()) {
+        audio(victoriaSound);
+        nextLevel();
+        return;
+      }
+      
+      audio(reboteSound);
     }
   }
 }

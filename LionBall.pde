@@ -1,9 +1,4 @@
-import ddf.minim.*;
-import ddf.minim.analysis.*;
-import ddf.minim.effects.*;
-import ddf.minim.signals.*;
-import ddf.minim.spi.*;
-import ddf.minim.ugens.*;
+import processing.sound.*;
 
 float deltaTime = 1/60; // no es necesario si se ejecuta desde el draw
 float gravity = .4;
@@ -20,7 +15,9 @@ void setup(){
   loadAllLevels();
   
   //audio
-  se = new Minim(this);
+  musica = new SoundFile(this, "musica.mp3");
+  musica.play();
+  musica.loop();
 }
 
 void draw(){
@@ -30,6 +27,11 @@ void draw(){
   }
   
   background(255);
+  
+  fill(0);
+  textSize(20);
+  text("Pulsa 'r' per reiniciar", 0, 20);
+  text("Haz clic en la bola, arrastra y deja de hacer clic para tirarla", 0, 40);
   
   fill(255, 0, 0);
   if(levelGenerated) circle(initialBall[0], initialBall[1], 20);
