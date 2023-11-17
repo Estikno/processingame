@@ -4,17 +4,20 @@ boolean valid = false;
 float[] initialBall = new float[2];
 boolean canInteract = false;
 boolean interacting = false;
+float[] maxVel = {10, 20};
 
 void mousePressed(){
   if(!canInteract) return;
-  interacting = true;
   
   float dX = mouseX - initialBall[0];
   float dY = mouseY - initialBall[1];
   
   float distance = sqrt(dX*dX + dY*dY);
   
-  if(distance < 20) valid = true;
+  if(distance < 20){
+    valid = true;
+    interacting = true;
+  }
   else valid = false;
 }
 
@@ -22,14 +25,31 @@ void mouseReleased(){
   mousePos[0] = mouseX;
   mousePos[1] = mouseY;
   
-  if(valid){
+  if(valid && canInteract){
     float[] dir = {mouseX-initialBall[0], mouseY-initialBall[1]};
     float[] vel = {dir[0]*shootIntensity, dir[1]*shootIntensity};
     
+    if(abs(vel[0]) > maxVel[0]){
+      if(vel[0] >= 0) vel[0] = maxVel[0];
+      else if(vel[0] < 0) vel[0] = -maxVel[0];
+    }
+    
+    if(abs(vel[1]) > maxVel[1]){
+      if(vel[1] >= 0) vel[1] = maxVel[1];
+      else if(vel[1] < 0) vel[1] = -maxVel[1];
+    }
+    
+    printArray(vel);
+    
     ball = new Circle(new float[] {initialBall[0], initialBall[1]}, vel, 20, new float[] {0, gravity});
     interacting = false;
-    
-    printArray(dir);
+    canInteract = false;
+  }
+}
+
+void keyPressed(){
+  if(key=='r'){
+    generateLevel(actualLevel);
   }
 }
 

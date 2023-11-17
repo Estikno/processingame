@@ -9,8 +9,8 @@ void detectCollisions() {
   float y0 = pos[1];
   float r = ball.r();
     
-  float y = pos[1] + v0[1]*.5 + .5*gravity*.75;
-  float x = pos[0] + v0[0]*.5;
+  float y = pos[1] + v0[1]*.75 + .5*gravity*(0.75*0.75);
+  float x = pos[0] + v0[0]*.75;
     
   if(x-r-collisionOffset <= 0 || x+r+collisionOffset >= width){
     ball.colDetected(new int[] {1, 0});
@@ -39,14 +39,15 @@ void detectCollisions() {
     float distanceX = x - testX + collisionOffset;
     float distanceY = y - testY + collisionOffset;
     
-    circle(testX, testY, 10);
+    //circle(testX, testY, 10);
     
     float distance = sqrt(distanceX*distanceX + distanceY*distanceY);
     
     if(distance < r){ //collision
       if(testX == x) ball.colDetected(new int[] {0, 1});
       if(testY == y) ball.colDetected(new int[] {1, 0});
-      if(o.isMeta()) print("you won");
+      
+      if(o.isMeta()) nextLevel();
     }
   }
 }

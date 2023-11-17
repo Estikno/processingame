@@ -1,3 +1,10 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 float deltaTime = 1/60; // no es necesario si se ejecuta desde el draw
 float gravity = .4;
 float collisionOffset = .6;
@@ -8,7 +15,12 @@ Circle ball;
 
 void setup(){
   size(1000, 600);
+  
+  //levels
   loadAllLevels();
+  
+  //audio
+  se = new Minim(this);
 }
 
 void draw(){
@@ -29,6 +41,16 @@ void draw(){
   if(interacting){
     float[] dir = {mouseX-initialBall[0], mouseY-initialBall[1]};
     float[] vel = {dir[0]*shootIntensity, dir[1]*shootIntensity};
+    
+    if(abs(vel[0]) > maxVel[0]){
+      if(vel[0] >= 0) vel[0] = maxVel[0];
+      else if(vel[0] < 0) vel[0] = -maxVel[0];
+    }
+    
+    if(abs(vel[1]) > maxVel[1]){
+      if(vel[1] >= 0) vel[1] = maxVel[1];
+      else if(vel[1] < 0) vel[1] = -maxVel[1];
+    }
     
     ArrayList<float[]> trajectory = calculateTrajectory(initialBall[0], initialBall[1], vel);
     
