@@ -16,6 +16,7 @@ void setup(){
   
   //audio
   musica = new SoundFile(this, "musica.mp3");
+  musica.amp(.3);
   musica.play();
   musica.loop();
 }
