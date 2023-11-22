@@ -47,7 +47,14 @@ void mouseReleased(){
 
 void keyPressed(){
   if(key=='r'){
+    if(hasWon){
+      hasWon = false;
+      actualLevel = 0;
+      levelGenerated = false;
+      return;
+    }
     generateLevel(actualLevel);
+    rebote.stop();
     audio(deathSound);
   }
 }

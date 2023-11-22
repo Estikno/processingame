@@ -2,6 +2,7 @@ String[] levels = { "1.txt","2.txt", "3.txt", "4.txt", "5.txt"};
 int actualLevel = 0;
 ArrayList<ArrayList<float[]>> levelsInfo = new ArrayList<ArrayList<float[]>>();
 boolean levelGenerated = false;
+boolean hasWon = false;
 
 void loadAllLevels(){
   for(int i=0;i<levels.length;i++){
@@ -62,11 +63,15 @@ void generateLevel(int level){
 
 void nextLevel(){
   if(actualLevel + 1 >= levels.length){
-    print("you won");
+    victoryScreen();
     return;
   }
   
   actualLevel++;
   canInteract = true;
   levelGenerated = false;
+}
+
+void victoryScreen(){
+  hasWon = true;
 }

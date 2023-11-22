@@ -16,12 +16,33 @@ void setup(){
   
   //audio
   musica = new SoundFile(this, "musica.mp3");
+  victoria = new SoundFile(this, victoriaSound);
+  death = new SoundFile(this, deathSound);
+  rebote = new SoundFile(this, reboteSound);
+  
+  victoria.amp(.2);
+  rebote.amp(1);
+  death.amp(.7);
   musica.amp(.3);
   musica.play();
   musica.loop();
 }
 
 void draw(){
+  if(hasWon){
+    background(255);
+    textSize(40);
+    fill(0);
+    text("Te has pasado el juego!!!", 300, 250);
+    text("Eres un crack, maquina, fiera, jefe, tifón, numero 1, ", 100, 350);
+    text("figura, mostro, mastodonte, toro, furia, ciclón, ", 100, 400);
+    textSize(35);
+    text("tornado, artista, fenómeno, campeón, maestro, torero, socio", 40, 450);
+    fill(255, 0, 0);
+    text("Pulsa 'r' para volver a jugar", 300, 500);
+    return;
+  }
+  
   if(!levelGenerated){
     generateLevel(actualLevel);
     levelGenerated = true;
